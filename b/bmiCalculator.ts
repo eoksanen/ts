@@ -18,7 +18,7 @@ const parseArguments = (args: Array<string>): calculateBmiValues => {
       }
     }
 
-    const calculateBmi = (a: number, b: number) => {
+   export const calculateBmi = (a: number, b: number) => {
 
         const bmi = (b/(Math.pow(a/100,2)))
 
