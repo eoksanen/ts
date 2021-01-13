@@ -1,6 +1,4 @@
 import express = require('express');
-//import bmi = require('bmiCalculator.ts')
-//const bmi = require('./exerciseCalculator.ts');
 import { calculateBmi } from "./bmiCalculator";
 const app = express();
 
@@ -9,21 +7,21 @@ app.get('/hello', (_req, res) => {
 });
 
 app.get('/bmi', (req, res) => {
-    
-    if(req.query.height) {
-        const height = req.query.height
-        console.log(height)
-    }
-    if(req.query.weight) {
-        const weight = req.query.weight
-        console.log(weight)
-    }
-    res.json({
-        weight: req.query.weight,
-        height: req.query.height,
-        bmi: calculateBmi(Number(req.query.height), Number(req.query.weight))
 
-    })
+  const height = Number(req.query.height)
+  const weight = Number(req.query.weight)
+    
+    if(height && weight) {
+    res.json({
+        weight: weight,
+        height: height,
+        bmi: calculateBmi(height, weight)
+      
+      })
+    } else {
+      res.status(400).send({ error: 'malformatted parameters' })
+
+    }
 
 });
 
