@@ -15,9 +15,9 @@ interface result {
 
   const parseArgumentsForEC = (args: Array<string>): calculateExercisesValues => {
 
-    const argsLenght = args.length
-    console.log(argsLenght)
-    console.log(args)
+    const argsLenght = args.length;
+    console.log(argsLenght);
+    console.log(args);
 
     if (argsLenght > 1) {
         return {
@@ -25,21 +25,21 @@ interface result {
             Number(args[8]), Number(args[9]), Number(args[10]), Number(args[11]) ],
             target: Number(args[2])
           
-        }
+        };
       } else {
         throw new Error('Provided values were not numbers!');
       }
-    }
+    };
 
   const average = (arr: Array<number>) => {
-        console.log(arr.reduce( ( p, c ) => p + c, 0 ) / arr.length)
+        console.log(arr.reduce( ( p, c ) => p + c, 0 ) / arr.length);
         return arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-  }
+  };
 
   const rateValue = (avg: number, target: number) => {
-        console.log(avg/target)
-        return avg/target
-  }
+        console.log(avg/target);
+        return avg/target;
+  };
   const rate = (rateValue: number, rd: boolean) => {
 
 
@@ -51,9 +51,9 @@ interface result {
     else throw new Error('This should be never happened');
 
     
-}
+};
 
-  const calculateExercises = (dailyExerciseHoursArray: number[], b: number): result => {
+  export const calculateExercises = (dailyExerciseHoursArray: number[], b: number): result => {
 
     
 
@@ -65,18 +65,18 @@ interface result {
         ratingDescription: rate(rateValue(average(dailyExerciseHoursArray), b), true),
         target: b,
         average: average(dailyExerciseHoursArray)
-      }
+      };
 
-  }
+  };
 
   try {
     const { exerciseDailyHours, target } = parseArgumentsForEC(process.argv);
 
-    console.log(exerciseDailyHours)
-    console.log(target)
+    console.log(exerciseDailyHours);
+    console.log(target);
      console.log(calculateExercises(exerciseDailyHours, target));
 
-  } catch(error) {
+  } catch(error) { // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       console.log(error.message);
 
   }

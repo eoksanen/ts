@@ -12,15 +12,15 @@ const parseArguments = (args: Array<string>): calculateBmiValues => {
         return {
           value1: Number(args[2]),
           value2: Number(args[3])
-        }
+        };
       } else {
         throw new Error('Provided values were not numbers!');
       }
-    }
+    };
 
-   export const calculateBmi = (a: number, b: number) => {
+   export const calculateBmi = (a: number, b: number): string => {
 
-        const bmi = (b/(Math.pow(a/100,2)))
+        const bmi = (b/(Math.pow(a/100,2)));
 
         if( bmi < 15 ) return "Very severely underweight";
         if( 15 < bmi && bmi < 17 ) return "Severely underweight";
@@ -34,12 +34,12 @@ const parseArguments = (args: Array<string>): calculateBmiValues => {
         else throw new Error('This should be never happened');
 
         
-    }
+    };
 
 
 try {
     const { value1, value2 } = parseArguments(process.argv);
     console.log(calculateBmi(value1, value2));
-  } catch (e) {
+  } catch (e) {  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     console.log('Error, something bad happened, message: ', e.message);
   }
