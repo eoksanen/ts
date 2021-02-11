@@ -4,7 +4,7 @@ import diagnoseService from '../services/diagnoseService';
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.send(diagnoseService.getNonSensitiveEntries());
+  res.send(diagnoseService.getEntries());
   //res.send('Fetching all diagnoses!');
 })
 
