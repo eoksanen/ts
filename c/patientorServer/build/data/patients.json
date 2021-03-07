@@ -38,5 +38,13 @@
         "ssn": "090471-8890",
         "gender": "male",
         "occupation": "Digital evangelist"
+    },
+    {
+        "id": "d2773c6e-f723-11e9-8f0b-362b9e155696",
+        "name": "Sampo Suomalainen",
+        "dateOfBirth": "1969-06-09",
+        "ssn": "090669-8890",
+        "gender": "male",
+        "occupation": "Digital evangelist"
     }
 ]

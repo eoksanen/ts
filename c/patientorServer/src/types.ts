@@ -4,6 +4,7 @@ export type Genre = 'male' | 'female';
 
 export type NonSensitiveDiagnoseEntry = Omit<DiagnoseEntry, 'latin'>;
 export type NonSensitivePatientsEntry = Omit<PatientEntry, 'ssn'>;
+export type NewPatientEntry = Omit<PatientEntry, 'id'>;
 
 export interface DiagnoseEntry {
     code: string;

@@ -1,5 +1,8 @@
 import patientData from '../../data/patients.json';
-import { NonSensitivePatientsEntry, PatientEntry } from '../types';
+import { NonSensitivePatientsEntry, PatientEntry, NewPatientEntry } from '../types';
+
+
+const { v4: uuidV4 } = require('uuid');
 
 const patients: Array<PatientEntry> = patientData as Array<PatientEntry>;
 
@@ -18,8 +21,16 @@ const getEntries = (): PatientEntry[] => {
     }));
 };
   
-  const addEntry = () => {
-    return null;
+  const addEntry = ( 
+    entry: NewPatientEntry
+    ): PatientEntry => {
+    
+      const newPatientEntry = {
+        id: uuidV4(), // Math.max(...patients.map(i => i.id)) +1,
+        ...entry
+      }
+      patients.push(newPatientEntry);
+      return newPatientEntry;
   };
   
   export default {

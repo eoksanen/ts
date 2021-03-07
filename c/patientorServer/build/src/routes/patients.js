@@ -11,6 +11,14 @@ router.get('/', (_req, res) => {
     //res.send('Fetching all patients!');
 });
 router.post('/', (_req, res) => {
-    res.send('Saving a patient!');
+    const { name, dateOfBirth, ssn, gender, occupation } = _req.body;
+    const newPatientEntry = patientService_1.default.addEntry({
+        name,
+        dateOfBirth,
+        ssn,
+        gender,
+        occupation
+    });
+    res.json(newPatientEntry);
 });
 exports.default = router;

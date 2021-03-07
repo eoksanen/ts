@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const patients_json_1 = __importDefault(require("../../data/patients.json"));
+const { v5: uuidV5 } = require('uuid');
 const patients = patients_json_1.default;
 const getEntries = () => {
     return patients;
@@ -17,8 +18,10 @@ const getNonSensitiveEntries = () => {
         occupation,
     }));
 };
-const addEntry = () => {
-    return null;
+const addEntry = (entry) => {
+    const newPatientEntry = Object.assign({ id: uuidV5() }, entry);
+    patients.push(newPatientEntry);
+    return newPatientEntry;
 };
 exports.default = {
     getEntries,
