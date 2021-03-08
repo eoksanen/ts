@@ -1,6 +1,9 @@
 
 
-export type Genre = 'male' | 'female';
+export enum Gender {
+    Male = 'male',
+    Female = 'female',
+}
 
 export type NonSensitiveDiagnoseEntry = Omit<DiagnoseEntry, 'latin'>;
 export type NonSensitivePatientsEntry = Omit<PatientEntry, 'ssn'>;
@@ -18,6 +21,6 @@ export interface PatientEntry {
     name: string;
     dateOfBirth: string;
     ssn: string;
-    gender: Genre;
+    gender: Gender;
     occupation: string
   }

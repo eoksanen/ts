@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import diagnoseData from '../../data/diagnoses.json';
 import { NonSensitiveDiagnoseEntry, DiagnoseEntry } from '../types';
 
