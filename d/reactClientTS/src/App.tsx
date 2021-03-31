@@ -132,6 +132,7 @@ const Part = ({name, exerciseCount, type, description, exerciseSubmissionLink, g
     <p>{description}</p>
     <p>{requirements}</p>
     <p>{exerciseSubmissionLink}</p>
+    <br></br>
   </div>
   );
 };
