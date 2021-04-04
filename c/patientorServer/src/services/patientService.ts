@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import patientData from '../../data/patients.json';
-import { NonSensitivePatientsEntry, PatientEntry, NewPatientEntry } from '../types';
+import {PatientEntry, NewPatientEntry, PublicPatient } from '../types';
 
 
 const { v4: uuidV4 } = require('uuid');
@@ -13,15 +13,27 @@ const getEntries = (): PatientEntry[] => {
     return patients;
   };
 
-  const getNonSensitiveEntries = (): NonSensitivePatientsEntry[] => {
-    return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+  const getNonSensitiveEntries = (): PublicPatient[] => {
+    return patients.map(({ id, name, dateOfBirth, gender, occupation, entries, ssn }) => ({
 
-        id,
         name,
+        ssn,
+        occupation,
         dateOfBirth,
         gender,
-        occupation,
+        entries,
+        id,
     }));
+};
+
+
+const getPatientById = (id: string): PatientEntry | null => {
+
+  const foundPatient = patients.find(patient => patient.id === id);
+
+  if(foundPatient) return foundPatient;
+  else return null;
+
 };
   
   const addEntry = ( 
@@ -42,5 +54,6 @@ const getEntries = (): PatientEntry[] => {
   export default {
     getEntries,
     addEntry,
-    getNonSensitiveEntries
+    getNonSensitiveEntries,
+    getPatientById
   };

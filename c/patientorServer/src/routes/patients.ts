@@ -10,6 +10,17 @@ router.get('/', (_req, res) => {
   //res.send('Fetching all patients!');
 });
 
+router.get('/:id', (_req, res) => {
+  const foundPatient = patientService.getPatientById(_req.params.id);
+
+  if(foundPatient) {
+    res.send(foundPatient);
+  } else {
+    res.send('Patient not found!');
+  }
+
+});
+
 router.post('/', (_req, res) => {
   try {
   //const { name, dateOfBirth, ssn, gender, occupation  } = _req.body;
