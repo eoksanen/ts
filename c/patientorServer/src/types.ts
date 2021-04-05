@@ -7,7 +7,7 @@ export enum Gender {
 
 export type NonSensitiveDiagnoseEntry = Omit<DiagnoseEntry, 'latin'>;
 export type NonSensitivePatientsEntry = Omit<PatientEntry, 'ssn'>;
-export type NewPatientEntry = Omit<PatientEntry, 'id'>;
+export type NewPatientEntry = Omit<PatientEntry, 'id' | 'entries' >;
 export type PublicPatient = Omit<PatientEntry, 'ssn' | 'entries' >;
 
 export interface DiagnoseEntry {

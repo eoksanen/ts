@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewPatientEntry, Gender } from './types';
+import { NewPatientEntry, Gender, //Entry 
+} from './types';
 
 const toNewPatientEntry = (object: any): NewPatientEntry => {
     return {
@@ -11,7 +12,8 @@ const toNewPatientEntry = (object: any): NewPatientEntry => {
         dateOfBirth: parseDate(object.dateOfBirth),
         ssn: parseName(object.ssn),
         gender: parseGender(object.gender),
-        occupation: parseName(object.occupation)
+        occupation: parseName(object.occupation),
+        //entries?: parseEntries(object.entries),
       };
   };
 
@@ -47,5 +49,12 @@ const parseName = (name: any): string => {
     }
     return date;
   };
+/*
+  const parseEntries = (param: any): param is Entry => {
 
+    if (param || isString(param)) {
+      return param;
+    }
+  };
+*/
 export default toNewPatientEntry;
