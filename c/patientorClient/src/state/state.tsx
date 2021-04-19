@@ -16,6 +16,11 @@ export const StateContext = createContext<[State, React.Dispatch<Action>]>([
   () => initialState
 ]);
 
+export const PTContext = createContext<[State, React.Dispatch<Action>]>([
+  initialState,
+  () => initialState
+]);
+
 type StateProviderProps = {
   reducer: React.Reducer<State, Action>;
   children: React.ReactElement;
@@ -32,4 +37,18 @@ export const StateProvider: React.FC<StateProviderProps> = ({
     </StateContext.Provider>
   );
 };
-export const useStateValue = () => useContext(StateContext);
+export const useStateValue = () => {
+  const context = useContext(StateContext); 
+  if(context === undefined) {
+    throw new Error('useStateValue must be used within a StateProvider')
+  }
+  return context
+}
+/*
+export const setPatientList = () => {
+  const context = useContext(PTContext);
+  if(context === undefined) {
+    throw new Error('setPatientList must be used within a StateProvider')
+  }
+}
+*/

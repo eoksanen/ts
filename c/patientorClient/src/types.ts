@@ -22,3 +22,7 @@ export interface Patient {
   dateOfBirth?: string;
   entries?: Entry[];
 }
+
+export type State = {
+  patients: { [id: string]: Patient | undefined };
+};

@@ -14,10 +14,10 @@ const getEntries = (): PatientEntry[] => {
   };
 
   const getNonSensitiveEntries = (): PublicPatient[] => {
-    return patients.map(({ id, name, dateOfBirth, gender, occupation, entries, ssn }) => ({
+    return patients.map(({ id, name, dateOfBirth, gender, occupation, entries }) => ({
 
         name,
-        ssn,
+       // ssn,
         occupation,
         dateOfBirth,
         gender,
