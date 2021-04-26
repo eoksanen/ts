@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import patientData from '../../data/patients.json';
+import patientData from '../../data/patients';
 import {PatientEntry, NewPatientEntry, PublicPatient } from '../types';
 
 
 const { v4: uuidV4 } = require('uuid');
 
 const patients: Array<PatientEntry> = patientData as Array<PatientEntry>;
+
+console.log(patients);
 
 const getEntries = (): PatientEntry[] => {
     return patients;
