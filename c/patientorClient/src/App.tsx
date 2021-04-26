@@ -13,6 +13,7 @@ import PatientPage from "./PatientPage";
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
   React.useEffect(() => {
+    console.log("APP")
     axios.get<void>(`${apiBaseUrl}/ping`);
 
     const fetchPatientList = async () => {
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           `${apiBaseUrl}/patients`
         );
         dispatch(  {type: "SET_PATIENT_LIST", payload: patientListFromApi});
+       // dispatch(setPatientList(patientListFromApi));
       } catch (e) {
         console.error(e);
       }

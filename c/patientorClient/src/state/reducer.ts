@@ -31,20 +31,8 @@ export const reducer = (state: State, action: Action): State => {
       };
     case "SET_PATIENT":
 
-
-     console.log("STATE ", state)
-     console.log("action.payload ",action.payload)
-
      const patients2 = Object.values(state.patients)
-     console.log("test", patients2.map(patient => patient.id !== action.payload.id ? patient : action.payload))
-
      const updatedPatients = patients2.map(patient => patient.id !== action.payload.id ? patient : action.payload)
-
-
-  const updatedPatientId = action.payload.id
-
-
-
 
        return {
        ...state,
@@ -53,7 +41,8 @@ export const reducer = (state: State, action: Action): State => {
           (memo, patient) => ({ ...memo, [patient.id]: patient }),
           
           {}
-        )
+        ),
+       // ...state.patients
 
         //[action.payload.id]: action.payload
 
@@ -78,5 +67,13 @@ export const setPatientList = (patientList: Patient[]) => {
   return {
     type: "SET_PATIENT_LIST",
     payload: patientList,
+  }
+}
+
+export const setPatient = (patient: Patient) => {
+
+  return {
+    type: "SET_PATIENT",
+    payload: patient,
   }
 }
