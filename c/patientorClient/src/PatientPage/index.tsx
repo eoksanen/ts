@@ -27,8 +27,8 @@ console.log("Patients STATE", patients)
             `${apiBaseUrl}/patients/${id}`
           );
           console.log("fetched pattients full info", patientFromApiByID)
-         // dispatch({ type: "SET_PATIENT", payload: patientFromApiByID });
-         dispatch(setPatient(patientFromApiByID));
+         dispatch({ type: "SET_PATIENT", payload: patientFromApiByID });
+        // dispatch(setPatient(patientFromApiByID));
         } catch (e) {
           console.error(e);
         }
@@ -38,7 +38,8 @@ console.log("Patients STATE", patients)
 
 
   const genreIcon = patient?.gender === 'male' ? <Icon name ='mars' size='large'></Icon> : <Icon name ='venus' size='large'></Icon>
-  
+
+
 
   return (
 
@@ -46,9 +47,47 @@ console.log("Patients STATE", patients)
       <h2>{patient?.name} {genreIcon}</h2>
       <p>ssn: {patient?.ssn}</p>
       <p>occupation: {patient?.occupation}</p>
+      <div>
+        <h3>entries</h3>
+        <ul>
+          {patient?.entries?.map((p) => {  
+            switch(p.type){
+
+            case "OccupationalHealthcare":
+              return (
+                <div key={p.id}>
+                  <h4>OccupationalHealthcare</h4>
+                  <p>{p.date} {p.description}</p>
+                  {p.diagnosisCodes?.map(dc => <li key={dc}>{dc}</li>)}
+                  </div>
+              )
+              break;
+            case "Hospital":
+              
+              break;
+            case "HealthCheck":
+              return (
+                <div key={p.id}>
+                  <h4>HealthCheck</h4>
+                  <p>{p.date} {p.description}</p>
+                  {p.diagnosisCodes?.map(dc => <li>{dc}</li>)}
+                  </div>
+
+            )              
+
+              break;
+            }
+
+  }
+  )
+  }
+          
+          
+        </ul>
+      </div>
     </div>
 
   )
-};
+  };
 
 export default PatientPage;
