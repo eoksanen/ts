@@ -4,7 +4,7 @@ import axios from "axios";
 import { useStateValue } from "../state";
 import { apiBaseUrl } from "../constants";
 import { Patient, Diagnosis } from "../types";
-import { Icon } from "semantic-ui-react";
+import { Icon, Container, Grid } from "semantic-ui-react";
 import { setPatient } from "../state"
 
   const PatientPage: React.FC = () => {
@@ -41,6 +41,8 @@ console.log("Patients STATE", patients)
 
 
   const genreIcon = patient?.gender === 'male' ? <Icon name ='mars' size='large'></Icon> : <Icon name ='venus' size='large'></Icon>
+  const heartGreen = <Icon name='heart' color = 'green'></Icon>
+  const heartYellow = <Icon name='heart' color ='yellow'></Icon>
 
 
 
@@ -52,20 +54,33 @@ console.log("Patients STATE", patients)
       <p>occupation: {patient?.occupation}</p>
       <div>
         <h3>entries</h3>
-        <ul>
           {patient?.entries?.map((p) => {  
             switch(p.type){
 
             case "OccupationalHealthcare":
               return (
                 <div key={p.id}>
-                  <h4>OccupationalHealthcare</h4>
-                  <p>{p.date} {p.description}</p>
+                 <Container>
+                   <Grid celled>
+                   <Grid.Row>
+   
+                  <h4>{p.date + " "}<Icon name ='stethoscope'></Icon> {p.employerName}</h4>
+
+                  </Grid.Row>
+               
+                    <Grid.Row>
+                    <p> {p.description}</p>
+                    <ul>
                   {p.diagnosisCodes?.map(dc => <li key={dc}>{dc} 
                   {diagnoses.map(d => 
-                   d?.code === dc ? d.name : null)}</li>)}
+                   d?.code === dc ? " " + d.name : null)}</li>)}
+                   </ul>
+                   
+                   </Grid.Row>
+                   </Grid>
+                   </Container>
                   </div>
-              )
+                      )
               break;
             case "Hospital":
               
@@ -73,26 +88,18 @@ console.log("Patients STATE", patients)
             case "HealthCheck":
               return (
                 <div key={p.id}>
-                  <h4>HealthCheck</h4>
+                  <h4>{p.date + " "}<Icon name= 'user md'></Icon></h4>
                   <p>{p.date} {p.description}</p>
-                  {p.diagnosisCodes?.map(dc => <li>{dc}</li>)}
+                  <p>{p.diagnosisCodes?.map(dc => <li>{dc}</li>)}</p>
+                  <p>{p.healthCheckRating === 0 ? heartGreen: heartYellow}  </p>
                   </div>
-
-            )              
-
+                      )              
               break;
             }
-
-  }
-  )
-  }
-          
-          
-        </ul>
+          })
+        }      
       </div>
     </div>
-
-  )
-  };
+  )};
 
 export default PatientPage;
