@@ -3,17 +3,20 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { apiBaseUrl } from "../constants";
-import { Patient } from "../types";
+import { Patient, Diagnosis } from "../types";
 import { Icon } from "semantic-ui-react";
 import { setPatient } from "../state"
 
   const PatientPage: React.FC = () => {
-    const [{ patients }, dispatch] = useStateValue();
+    const [{ patients, diagnosis }, dispatch] = useStateValue();
     const { id } = useParams<{ id: string }>();
 
+    
+console.log("Patients STATE diagnosis ", diagnosis)
 console.log("Patients STATE", patients)
 
     let patient = Object.values(patients).find((patient: Patient) => ((patient.id === id)))
+    let diagnoses = Object.values(diagnosis)
   
   
     React.useEffect(() => {
@@ -58,7 +61,9 @@ console.log("Patients STATE", patients)
                 <div key={p.id}>
                   <h4>OccupationalHealthcare</h4>
                   <p>{p.date} {p.description}</p>
-                  {p.diagnosisCodes?.map(dc => <li key={dc}>{dc}</li>)}
+                  {p.diagnosisCodes?.map(dc => <li key={dc}>{dc} 
+                  {diagnoses.map(d => 
+                   d?.code === dc ? d.name : null)}</li>)}
                   </div>
               )
               break;

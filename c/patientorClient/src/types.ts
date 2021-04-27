@@ -22,6 +22,7 @@ export interface Patient {
 
 export type State = {
   patients: { [id: string]: Patient | undefined };
+  diagnosis: {[code: string]: Diagnosis | undefined};
 };
 
 interface BaseEntry {
