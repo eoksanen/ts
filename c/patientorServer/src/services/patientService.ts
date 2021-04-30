@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import patientData from '../../data/patients';
-import {PatientEntry, NewPatientEntry, PublicPatient } from '../types';
+import {PatientEntry, NewPatientEntry, PublicPatient, HospitalEntry, Entry, NewEntry, OccupationalHealthcareEntry, HealthCheckEntry } from '../types';
 
 
 const { v4: uuidV4 } = require('uuid');
@@ -37,8 +37,28 @@ const getPatientById = (id: string): PatientEntry | null => {
   else return null;
 
 };
+
+const addEntryForPatient = (
+    patientId: string,
+    entry: NewEntry
+): Entry => {
+
+  const uuid = uuidV4();
+  console.log(uuid);
+
+  const newEntry = {
+    id: uuid, // Math.max(...patients.map(i => i.id)) +1,
+    ...entry
+  };
+  const patient = patients.find(p => p.id === patientId);
+  console.log("patient ", patient);
+  //patient?.entries ? patient?.entries.push(newEntry) : null; // fixed later
+  return newEntry;
+
+};
+
   
-  const addEntry = ( 
+  const addPatientEntry = ( 
     entry: NewPatientEntry
     ): PatientEntry => {
 
@@ -55,7 +75,8 @@ const getPatientById = (id: string): PatientEntry | null => {
   
   export default {
     getEntries,
-    addEntry,
+    addPatientEntry,
+    addEntryForPatient,
     getNonSensitiveEntries,
     getPatientById
   };

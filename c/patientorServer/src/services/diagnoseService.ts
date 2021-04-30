@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import diagnoseData from '../../data/diagnoses.json';
-import { NonSensitiveDiagnoseEntry, DiagnoseEntry } from '../types';
+import { NonSensitiveDiagnoseEntry, DiagnoseEntry, DiagnoseCodes } from '../types';
 
 const getEntries = (): DiagnoseEntry[] => {
     return diagnoseData;
@@ -12,6 +12,10 @@ const getEntries = (): DiagnoseEntry[] => {
       name,
     }));
 };
+
+const getDiagnoseCodes = (): DiagnoseCodes[] => {
+  return diagnoseData.map(({code}) => ({code}));
+};
   
   const addEntry = () => {
     return null;
@@ -20,5 +24,6 @@ const getEntries = (): DiagnoseEntry[] => {
   export default {
     getEntries,
     addEntry,
-    getNonSensitiveEntries
+    getNonSensitiveEntries,
+    getDiagnoseCodes
   };

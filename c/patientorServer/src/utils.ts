@@ -3,10 +3,11 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewPatientEntry, Gender, //Entry 
-} from './types';
+import { NewPatientEntry, NewEntry, Gender, Type } from './types';
+//import diagnoseService from '../services/diagnoseService';
 
-const toNewPatientEntry = (object: any): NewPatientEntry => {
+
+export const toNewPatientEntry = (object: any): NewPatientEntry => {
     return {
         name: parseName(object.name),
         dateOfBirth: parseDate(object.dateOfBirth),
@@ -17,6 +18,24 @@ const toNewPatientEntry = (object: any): NewPatientEntry => {
       };
   };
 
+ export const toNewEntryForPatient = (object: any): NewEntry => {
+    return {
+        type: parseType(object.type),
+        description: parseName(object.name),
+        date: parseDate(object.date),
+        specialist: parseName(object.specialist),
+        diagnosisCodes: parseDiagnosis(object.diagnosisCodes),
+
+      };
+  };
+
+  const parseDiagnosis = (diagnosisCodes: any): string[] => {
+  
+  //  const diagnoseData: string[] = diagnoseService.getDiagnoseCodes();
+   // diagnoseData.map(dc => diagnosisCodes.map(dcd => dcd === dc));
+
+    return diagnosisCodes;
+  };
 
 const parseGender = (gender: any): Gender => {
     if (!gender || !isGender) {
@@ -49,12 +68,12 @@ const parseName = (name: any): string => {
     }
     return date;
   };
-/*
-  const parseEntries = (param: any): param is Entry => {
 
-    if (param || isString(param)) {
-      return param;
-    }
+
+  const parseType = (type: any): type is Type => {
+    return Object.values(Type).includes(type);
   };
-*/
+
+
+
 export default toNewPatientEntry;

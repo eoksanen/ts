@@ -54,24 +54,24 @@ console.log("Patients STATE", patients)
       <p>occupation: {patient?.occupation}</p>
       <div>
         <h3>entries</h3>
-          {patient?.entries?.map((p) => {  
-            switch(p.type){
+          {patient?.entries?.map((pe) => {  
+            switch(pe.type){
 
             case "OccupationalHealthcare":
               return (
-                <div key={p.id}>
+                <div key={pe.id}>
                  <Container>
                    <Grid celled>
                    <Grid.Row>
    
-                  <h4>{p.date + " "}<Icon name ='stethoscope'></Icon> {p.employerName}</h4>
+                  <h4>{pe.date + " "}<Icon name ='stethoscope'></Icon> {pe.employerName}</h4>
 
                   </Grid.Row>
                
                     <Grid.Row>
-                    <p> {p.description}</p>
+                    <p> {pe.description}</p>
                     <ul>
-                  {p.diagnosisCodes?.map(dc => <li key={dc}>{dc} 
+                  {pe.diagnosisCodes?.map(dc => <li key={dc}>{dc} 
                   {diagnoses.map(d => 
                    d?.code === dc ? " " + d.name : null)}</li>)}
                    </ul>
@@ -87,11 +87,11 @@ console.log("Patients STATE", patients)
               break;
             case "HealthCheck":
               return (
-                <div key={p.id}>
-                  <h4>{p.date + " "}<Icon name= 'user md'></Icon></h4>
-                  <p>{p.date} {p.description}</p>
-                  <p>{p.diagnosisCodes?.map(dc => <li>{dc}</li>)}</p>
-                  <p>{p.healthCheckRating === 0 ? heartGreen: heartYellow}  </p>
+                <div key={pe.id}>
+                  <h4>{pe.date + " "}<Icon name= 'user md'></Icon></h4>
+                  <p>{pe.date} {pe.description}</p>
+                  <p>{pe.diagnosisCodes?.map(dc => <li>{dc}</li>)}</p>
+                  <p>{pe.healthCheckRating === 0 ? heartGreen: heartYellow}  </p>
                   </div>
                       )              
               break;

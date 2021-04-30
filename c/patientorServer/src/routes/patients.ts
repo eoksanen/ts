@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import express from 'express';
 import patientService from '../services/patientService';
-import toNewPatientEntry from '../utils';
+import { toNewEntryForPatient, toNewPatientEntry } from '../utils';
 
 const router = express.Router();
 
@@ -27,8 +27,24 @@ router.post('/', (_req, res) => {
 
   const newPatientEntry = toNewPatientEntry(_req.body);
 
-  const addedPatientEntry = patientService.addEntry(newPatientEntry);
+  const addedPatientEntry = patientService.addPatientEntry(newPatientEntry);
   res.json(addedPatientEntry);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
+router.post('/:id/entries', (_req, res) => {
+  try {
+  //const { name, dateOfBirth, ssn, gender, occupation  } = _req.body;
+
+  const patientId = _req.params.id;
+
+  const newEntryForPatient = toNewEntryForPatient(_req.body);
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const addedEntryForPatient = patientService.addEntryForPatient(patientId, newEntryForPatient);
+  res.json(addedEntryForPatient);
   } catch (e) {
     res.status(400).send(e.message);
   }
