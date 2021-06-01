@@ -69,8 +69,15 @@ const parseName = (name: any): string => {
     return date;
   };
 
+  const parseType =  (type: any): Type => {
 
-  const parseType = (type: any): type is Type => {
+    if(!type || !isType) {
+      throw new Error('incorrect or missing type ' + type);
+    }
+    return type;
+  };
+
+  const isType = (type: any): type is Type => {
     return Object.values(Type).includes(type);
   };
 
