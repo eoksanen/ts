@@ -37,7 +37,7 @@ console.log("Patients STATE", patients)
         }
       };
       if(!patient?.ssn) fetchPatientList();
-    }, [dispatch]);
+    }, [dispatch, id, patient]);
 
 
   const genreIcon = patient?.gender === 'male' ? <Icon name ='mars' size='large'></Icon> : <Icon name ='venus' size='large'></Icon>
@@ -81,20 +81,30 @@ console.log("Patients STATE", patients)
                    </Container>
                   </div>
                       )
-              break;
+              //break;
             case "Hospital":
               
               break;
             case "HealthCheck":
               return (
                 <div key={pe.id}>
+                    <Container>
+                   <Grid celled>
+                   <Grid.Row>
                   <h4>{pe.date + " "}<Icon name= 'user md'></Icon></h4>
+                  </Grid.Row>
+               
+               <Grid.Row>
+
                   <p>{pe.date} {pe.description}</p>
                   <p>{pe.diagnosisCodes?.map(dc => <li>{dc}</li>)}</p>
                   <p>{pe.healthCheckRating === 0 ? heartGreen: heartYellow}  </p>
+                  </Grid.Row>
+                   </Grid>
+                   </Container>
                   </div>
                       )              
-              break;
+             // break;
             }
           })
         }      

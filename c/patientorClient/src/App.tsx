@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Button, Divider, Header, Container } from "semantic-ui-react";
 
 import { apiBaseUrl } from "./constants";
-import { useStateValue, setPatientList } from "./state";
+import { useStateValue, //setPatientList 
+} from "./state";
 import { Patient, Diagnosis } from "./types";
 
 import PatientListPage from "./PatientListPage";
@@ -48,7 +49,7 @@ const App: React.FC = () => {
       }
     };
     fetchDiagnoseCodes();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">

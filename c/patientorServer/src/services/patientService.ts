@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import patientData from '../../data/patients';
-import {PatientEntry, NewPatientEntry, PublicPatient, HospitalEntry, Entry, NewEntry, OccupationalHealthcareEntry, HealthCheckEntry } from '../types';
+import {PatientEntry, NewPatientEntry, PublicPatient, Entry, NewEntry, } from '../types';
 
 
 const { v4: uuidV4 } = require('uuid');
 
-const patients: Array<PatientEntry> = patientData as Array<PatientEntry>;
+const patients: Array<PatientEntry> = patientData;// as Array<PatientEntry>;
 
 console.log(patients);
 
@@ -50,9 +50,10 @@ const addEntryForPatient = (
     id: uuid, // Math.max(...patients.map(i => i.id)) +1,
     ...entry
   };
+  console.log("patient  ID ", patientId);
   const patient = patients.find(p => p.id === patientId);
   console.log("patient ", patient);
-  //patient?.entries ? patient?.entries.push(newEntry) : null; // fixed later
+  patient?.entries ? patient?.entries.push(newEntry) : null;
   return newEntry;
 
 };

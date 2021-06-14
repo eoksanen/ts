@@ -19,9 +19,10 @@ export const toNewPatientEntry = (object: any): NewPatientEntry => {
   };
 
  export const toNewEntryForPatient = (object: any): NewEntry => {
+   console.log("toNewEntryForPatient");
     return {
         type: parseType(object.type),
-        description: parseName(object.name),
+        description: parseName(object.description),
         date: parseDate(object.date),
         specialist: parseName(object.specialist),
         diagnosisCodes: parseDiagnosis(object.diagnosisCodes),
@@ -48,6 +49,7 @@ const isGender = (param: any): param is Gender => {
     return Object.values(Gender).includes(param);
   };
 const parseName = (name: any): string => {
+  console.log(name);
     if (!name || !isString(name) ) {
         throw new Error('Incorrect or missing name: ' + name);
     }
