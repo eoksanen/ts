@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import patientData from '../../data/patients';
-import {PatientEntry, NewPatientEntry, PublicPatient, Entry, NewEntry, } from '../types';
+import {PatientEntry, NewPatientEntry, PublicPatient, Entry, NewEntry } from '../types';
 
 
 const { v4: uuidV4 } = require('uuid');

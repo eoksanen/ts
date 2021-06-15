@@ -1,5 +1,5 @@
 import { State } from "./state";
-import { Diagnosis, Patient } from "../types";
+import { Diagnosis, Patient, Entry } from "../types";
 
 export type Action =
   | {
@@ -17,7 +17,11 @@ export type Action =
   | {
       type: "ADD_PATIENT";
       payload: Patient;
-    };
+    }
+  | {
+      type: "ADD_NEW_ENTRY_FOR_PATIENT";
+      payload: [String, Entry];
+    }
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_PATIENT_LIST":
@@ -60,6 +64,27 @@ export const reducer = (state: State, action: Action): State => {
           [action.payload.id]: action.payload
         }
       };
+
+      case "ADD_NEW_ENTRY_FOR_PATIENT":
+
+        const ptnts = Object.values(state.patients)
+
+        const patientEntryFor = ptnts.find(ptn => ptn.id === action.payload[0])
+
+        return {
+          ...state,
+          ...state.patients,
+
+/*
+          ...patientEntryFor, entries: patientEntryFor?.entries.concat(action.payload[1])
+
+
+          patients: {
+            ...state.patients,
+            [action.payload.id]: action.payload
+
+          }*/
+        };
 
     case "SET_DIAGNOSE_CODES":
       return {
