@@ -10,7 +10,7 @@ export type Action =
       type: "SET_PATIENT_LIST";
       payload: Patient[];
     }
-    | {
+  | {
       type: "SET_PATIENT";
       payload: Patient;
     }
@@ -20,11 +20,12 @@ export type Action =
     }
   | {
       type: "ADD_NEW_ENTRY_FOR_PATIENT";
-      payload: [String, Entry];
-    }
+      payload: [string, Entry];
+    };
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_PATIENT_LIST":
+      console.log(action.payload);
       return {
         ...state,
         patients: {
@@ -38,8 +39,8 @@ export const reducer = (state: State, action: Action): State => {
       };
     case "SET_PATIENT":
 
-     const patients2 = Object.values(state.patients)
-     const updatedPatients = patients2.map(patient => patient.id !== action.payload.id ? patient : action.payload)
+     const patients2 = Object.values(state.patients);
+     const updatedPatients = patients2.map(patient => patient.id !== action.payload.id ? patient : action.payload);
 
        return {
        ...state,
@@ -67,9 +68,9 @@ export const reducer = (state: State, action: Action): State => {
 
       case "ADD_NEW_ENTRY_FOR_PATIENT":
 
-        const ptnts = Object.values(state.patients)
+    //    const ptnts = Object.values(state.patients);
 
-        const patientEntryFor = ptnts.find(ptn => ptn.id === action.payload[0])
+       // const patientEntryFor = ptnts.find(ptn => ptn.id === action.payload[0]);
 
         return {
           ...state,
@@ -89,13 +90,13 @@ export const reducer = (state: State, action: Action): State => {
     case "SET_DIAGNOSE_CODES":
       return {
         ...state,
-        diagnosis: {
+        diagnoses: {
           ...action.payload.reduce(
-            (memo, diagnose) => ({ ...memo, [diagnose.code]: diagnose }),
+            (memo, diagnosis) => ({ ...memo, [diagnosis.code]: diagnosis }),
             
             {}
           ),
-          ...state.diagnosis,
+          ...state.diagnoses,
         },
         ...state.patients
       };
@@ -112,13 +113,13 @@ export const setPatientList = (patientList: Patient[]) => {
   return {
     type: "SET_PATIENT_LIST",
     payload: patientList,
-  }
-}
+  };
+};
 
 export const setPatient = (patient: Patient) => {
 
   return {
     type: "SET_PATIENT",
     payload: patient,
-  }
-}
+  };
+};

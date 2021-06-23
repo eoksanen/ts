@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -6,9 +6,13 @@ import { PatientEntryFormValues } from "../AddEntryForPatientModal/AddEntryForPa
 import AddEntryForPatientModal from "../AddEntryForPatientModal";
 import { useStateValue } from "../state";
 import { apiBaseUrl } from "../constants";
-import { Patient, Entry, Diagnosis } from "../types";
-import { Icon, Container, Grid, Table, Button } from "semantic-ui-react";
-import { setPatient } from "../state"
+import { Patient, Entry } from "../types";
+import { Icon, Container, Grid, Button } from "semantic-ui-react";
+//import { setPatient } from "../state";
+
+const PatientPage: React.FC = () => {
+  const [{ patients, diagnoses }, dispatch] = useStateValue();
+  const { id } = useParams<{ id: string }>();
 
 
 const [error, setError] = React.useState<string | undefined>();
@@ -21,20 +25,16 @@ const closeModal = (): void => {
   setError(undefined);
 };
 
-  const PatientPage: React.FC = () => {
-    const [{ patients, diagnosis }, dispatch] = useStateValue();
-    const { id } = useParams<{ id: string }>();
 
     
-console.log("Patients STATE diagnosis ", diagnosis)
-console.log("Patients STATE", patients)
+console.log("Patients STATE diagnosis ", diagnoses);
+console.log("Patients STATE", patients);
 
-    let patient = Object.values(patients).find((patient: Patient) => ((patient.id === id)))
-    let diagnoses = Object.values(diagnosis)
+    const patient = Object.values(patients).find((patient: Patient) => ((patient.id === id)));
   
   
     React.useEffect(() => {
-      console.log("PatientPage")
+      console.log("PatientPage");
       axios.get<void>(`${apiBaseUrl}/ping`);
   
       const fetchPatientList = async () => {
@@ -43,7 +43,7 @@ console.log("Patients STATE", patients)
           const { data: patientFromApiByID } = await axios.get<Patient>(
             `${apiBaseUrl}/patients/${id}`
           );
-          console.log("fetched pattients full info", patientFromApiByID)
+          console.log("fetched pattients full info", patientFromApiByID);
          dispatch({ type: "SET_PATIENT", payload: patientFromApiByID });
         // dispatch(setPatient(patientFromApiByID));
         } catch (e) {
@@ -54,9 +54,9 @@ console.log("Patients STATE", patients)
     }, [dispatch, id, patient]);
 
 
-  const genreIcon = patient?.gender === 'male' ? <Icon name ='mars' size='large'></Icon> : <Icon name ='venus' size='large'></Icon>
-  const heartGreen = <Icon name='heart' color = 'green'></Icon>
-  const heartYellow = <Icon name='heart' color ='yellow'></Icon>
+  const genreIcon = patient?.gender === 'male' ? <Icon name ='mars' size='large'></Icon> : <Icon name ='venus' size='large'></Icon>;
+  const heartGreen = <Icon name='heart' color = 'green'></Icon>;
+  const heartYellow = <Icon name='heart' color ='yellow'></Icon>;
 
 
   const submitNewEntryForPatient = async (values: PatientEntryFormValues) => {
@@ -109,7 +109,7 @@ console.log("Patients STATE", patients)
                    </Grid>
                    </Container>
                   </div>
-                      )
+                      );
               //break;
             case "Hospital":
               return (
@@ -136,7 +136,7 @@ console.log("Patients STATE", patients)
                    </Grid>
                    </Container>
                   </div>
-                      )
+                      );
               
              // break;
             case "HealthCheck":
@@ -157,7 +157,7 @@ console.log("Patients STATE", patients)
                    </Grid>
                    </Container>
                   </div>
-                      )              
+                      );              
              // break;
             }
           })
@@ -172,6 +172,6 @@ console.log("Patients STATE", patients)
       />
       <Button onClick={() => openModal()}>Add Entry for Patient</Button>
     </div>
-  )};
+  );};
 
 export default PatientPage;

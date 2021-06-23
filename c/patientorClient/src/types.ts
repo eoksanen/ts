@@ -1,8 +1,9 @@
 export interface Diagnosis {
   code: string;
   name: string;
-  latin?: string;
+  latin?: string; 
 }
+
 
 export enum Gender {
   Male = "male",
@@ -22,7 +23,8 @@ export interface Patient {
 
 export type State = {
   patients: { [id: string]: Patient | undefined };
-  diagnosis: {[code: string]: Diagnosis | undefined};
+  diagnoses: {[code: string]: Diagnosis | undefined};
+
 };
 
 interface BaseEntry {
@@ -42,7 +44,7 @@ export enum HealthCheckRating {
 
 export interface Discharge {
     date: string;
-    criteria: string
+    criteria: string;
 }
 
 export interface SickLeave {

@@ -5,13 +5,14 @@ import { Action } from "./reducer";
 
 export type State = {
   patients: { [id: string]: Patient };
-  diagnosis: {[code: string]: Diagnosis | undefined};
+  diagnoses: {[code: string]: Diagnosis | undefined};
+
 
 };
 
 const initialState: State = {
   patients: {},
-  diagnosis: {}
+  diagnoses: {}
 };
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([
@@ -43,10 +44,10 @@ export const StateProvider: React.FC<StateProviderProps> = ({
 export const useStateValue = () => {
   const context = useContext(StateContext); 
   if(context === undefined) {
-    throw new Error('useStateValue must be used within a StateProvider')
+    throw new Error('useStateValue must be used within a StateProvider');
   }
-  return context
-}
+  return context;
+};
 /*
 export const setPatientList = () => {
   const context = useContext(PTContext);

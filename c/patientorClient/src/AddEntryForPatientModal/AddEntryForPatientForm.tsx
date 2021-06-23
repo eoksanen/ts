@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, Button } from "semantic-ui-react";
 import { Field, Formik, Form } from "formik";
-
-import { TextField, SelectField, GenderOption } from "../AddPatientModal/FormField";
+import { useStateValue } from "../state";
+import { TextField, SelectField, GenderOption, DiagnosisSelection, NumberField } from "../AddPatientModal/FormField";
 import { Gender, Entry } from "../types";
 
 /*
@@ -23,69 +23,75 @@ const genderOptions: GenderOption[] = [
 ];
 
 export const AddEntryForPatientForm = ({ onSubmit, onCancel }: Props) => {
+  const [{ diagnoses }] = useStateValue();
   return (
     
     <Formik
     
       initialValues={{
-        name: "",
-        ssn: "",
-        dateOfBirth: "",
-        occupation: "",
-        gender: Gender.Other
+        type: "Hospital",
+        description: "",
+        date: "",
+        specialist: ""
       }}
       onSubmit={onSubmit}
       validate={values => {
         const requiredError = "Field is required";
         const errors: { [field: string]: string } = {};
-        if (!values.name) {
+        if (!values.description) {
           errors.name = requiredError;
         }
-        if (!values.ssn) {
+        if (!values.date) {
           errors.ssn = requiredError;
         }
-        if (!values.dateOfBirth) {
+        if (!values.specialist) {
           errors.dateOfBirth = requiredError;
         }
-        if (!values.occupation) {
+        if (!values.type) {
           errors.occupation = requiredError;
         }
         return errors;
       }}
       
     >
-      {({ isValid, dirty }) => {
+      {({ isValid, dirty, setFieldValue, setFieldTouched }) => {
         return (
           <Form className="form ui">
             <Field
-              label="Name"
-              placeholder="Name"
-              name="name"
+              label="description"
+              placeholder="Description"
+              name="description"
               component={TextField}
             />
             <Field
-              label="Social Security Number"
-              placeholder="SSN"
-              name="ssn"
-              component={TextField}
-            />
-            <Field
-              label="Date Of Birth"
+              label="date"
               placeholder="YYYY-MM-DD"
-              name="dateOfBirth"
+              name="date"
               component={TextField}
             />
             <Field
-              label="Occupation"
-              placeholder="Occupation"
-              name="occupation"
+              label="specialist"
+              placeholder="specialist"
+              name="specialist"
               component={TextField}
             />
+            <Field
+              label="healthCheckRating"
+              name="healthCheckRating"
+              component={NumberField}
+              min={0}
+              max={3}
+/>
             <SelectField
-              label="Gender"
-              name="gender"
+              label="diagnosisCodes"
+              name="diagnosisCodes"
               options={genderOptions}
             />
+            <DiagnosisSelection
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
+            diagnoses={Object.values(diagnoses)}
+          />   
             <Grid>
               <Grid.Column floated="left" width={5}>
                 <Button type="button" onClick={onCancel} color="red">
