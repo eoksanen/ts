@@ -6,7 +6,7 @@ import { PatientEntryFormValues } from "../AddEntryForPatientModal/AddEntryForPa
 import AddEntryForPatientModal from "../AddEntryForPatientModal";
 import { useStateValue } from "../state";
 import { apiBaseUrl } from "../constants";
-import { Patient, Entry } from "../types";
+import { Patient, Entry, Diagnosis } from "../types";
 import { Icon, Container, Grid, Button } from "semantic-ui-react";
 //import { setPatient } from "../state";
 
@@ -31,6 +31,11 @@ console.log("Patients STATE diagnosis ", diagnoses);
 console.log("Patients STATE", patients);
 
     const patient = Object.values(patients).find((patient: Patient) => ((patient.id === id)));
+    const diagnosesFromObject = Object.values(diagnoses);
+
+    console.log("diagnosesFromObject ", diagnosesFromObject);
+    
+    //Object.values(diagnoses).find((diagnosis: Diagnosis) => ((diagnosis.code === dc)));
   
   
     React.useEffect(() => {
@@ -101,8 +106,9 @@ console.log("Patients STATE", patients);
                     <p> {pe.description}</p>
                     <ul>
                   {pe.diagnosisCodes?.map(dc => <li key={dc}>{dc} 
-                  {diagnoses.map(d => 
-                   d?.code === dc ? " " + d.name : null)}</li>)}
+                  {diagnosesFromObject.map((d: Diagnosis) => 
+                   d?.code === dc ? " " + d.name : null)
+                }</li>)}
                    </ul>
                    
                    </Grid.Row>
@@ -123,11 +129,12 @@ console.log("Patients STATE", patients);
                         <li>
                           <p> {pe.description}</p>
                         </li>
-                         <li>
+            
                             {pe.diagnosisCodes?.map(dc => <li key={dc}>{dc} 
-                            {diagnoses.map(d => 
-                            d?.code === dc ? " " + d.name : null)}</li>)}
-                          </li>
+                            {Object.values(diagnoses).map((d: Diagnosis) => 
+                            d?.code === dc ? " " + d.name : null)
+                            }</li>)}
+                   
                           <li>
                             {pe.discharge?.date}
                             {pe.discharge?.criteria}
@@ -151,7 +158,10 @@ console.log("Patients STATE", patients);
                <Grid.Row>
 
                   <p>{pe.date} {pe.description}</p>
-                  <p>{pe.diagnosisCodes?.map(dc => <li>{dc}</li>)}</p>
+                  <p>{pe.diagnosisCodes?.map(dc => <li key={dc}>{dc}
+                    {Object.values(diagnoses).map((d: Diagnosis) => 
+                            d?.code === dc ? " " + d.name : null)
+                    }</li>)}</p>
                   <p>{pe.healthCheckRating === 0 ? heartGreen: heartYellow}  </p>
                   </Grid.Row>
                    </Grid>

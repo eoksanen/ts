@@ -3,9 +3,10 @@ import { Patient, Diagnosis } from "../types";
 
 import { Action } from "./reducer";
 
+
 export type State = {
   patients: { [id: string]: Patient };
-  diagnoses: {[code: string]: Diagnosis | undefined};
+  diagnoses: {[code: string]: Diagnosis };
 
 
 };

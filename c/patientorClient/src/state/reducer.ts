@@ -70,11 +70,29 @@ export const reducer = (state: State, action: Action): State => {
 
     //    const ptnts = Object.values(state.patients);
 
+    const patients3 = Object.values(state.patients);
+    console.log(patients3);
+    console.log("action payload ", action.payload[1]);
+    const updatedPatientEntryFor = patients3.find(patient => patient.id !== action.payload[0] ? patient : action.payload);
+
+    console.log("updatedPatientEntryFor  ",updatedPatientEntryFor);
+
+    updatedPatientEntryFor?.entries?.concat(action.payload[1]);
+    updatedPatientEntryFor?.entries?.concat(action.payload[1]);
+
+    console.log("updatedPatientEntryForAdded  ",updatedPatientEntryFor);
+
        // const patientEntryFor = ptnts.find(ptn => ptn.id === action.payload[0]);
 
         return {
           ...state,
-          ...state.patients,
+          ...state.patients
+
+          /*
+          entries: {
+            ...state.patients.entries,
+            [action.payload.]
+          }*/
 
 /*
           ...patientEntryFor, entries: patientEntryFor?.entries.concat(action.payload[1])

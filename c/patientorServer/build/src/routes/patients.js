@@ -33,7 +33,7 @@ router.post('/', (_req, res) => {
     }
 });
 router.post('/:id/entries', (_req, res) => {
-    console.log(_req);
+    console.log(_req.params.body);
     try {
         //const { name, dateOfBirth, ssn, gender, occupation  } = _req.body;
         const patientId = _req.params.id;

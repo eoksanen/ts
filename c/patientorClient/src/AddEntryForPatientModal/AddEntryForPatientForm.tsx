@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, Button } from "semantic-ui-react";
 import { Field, Formik, Form } from "formik";
 import { useStateValue } from "../state";
-import { TextField, SelectField, GenderOption, DiagnosisSelection, NumberField } from "../AddPatientModal/FormField";
-import { Gender, Entry } from "../types";
+import { TextField, DiagnosisSelection, NumberField } from "../AddPatientModal/FormField";
+import { Entry } from "../types";
 
 /*
  * use type Patient, but omit id and entries,
@@ -16,11 +16,6 @@ interface Props {
   onCancel: () => void;
 }
 
-const genderOptions: GenderOption[] = [
-  { value: Gender.Male, label: "Male" },
-  { value: Gender.Female, label: "Female" },
-  { value: Gender.Other, label: "Other" }
-];
 
 export const AddEntryForPatientForm = ({ onSubmit, onCancel }: Props) => {
   const [{ diagnoses }] = useStateValue();
@@ -82,11 +77,6 @@ export const AddEntryForPatientForm = ({ onSubmit, onCancel }: Props) => {
               min={0}
               max={3}
 />
-            <SelectField
-              label="diagnosisCodes"
-              name="diagnosisCodes"
-              options={genderOptions}
-            />
             <DiagnosisSelection
             setFieldValue={setFieldValue}
             setFieldTouched={setFieldTouched}
