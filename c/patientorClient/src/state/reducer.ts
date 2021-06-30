@@ -72,38 +72,46 @@ export const reducer = (state: State, action: Action): State => {
 
     const patients3 = Object.values(state.patients);
     console.log(patients3);
-    console.log("action payload ", action.payload[1]);
-    const updatedPatientEntryFor = patients3.find(patient => patient.id !== action.payload[0] ? patient : action.payload);
+    console.log("action payload 1", action.payload[1]);
+    console.log("action payload 0", action.payload[0]);
+    const updatedPatientEntryFor = patients3.find(patient => patient.id === action.payload[0]);
 
     console.log("updatedPatientEntryFor  ",updatedPatientEntryFor);
 
-    updatedPatientEntryFor?.entries?.concat(action.payload[1]);
-    updatedPatientEntryFor?.entries?.concat(action.payload[1]);
 
-    console.log("updatedPatientEntryForAdded  ",updatedPatientEntryFor);
+    //const entryAddedForPatient =  updatedPatientEntryFor?.entries?.concat(action.payload[1]);
+
+    //console.log("updatedPatientEntryForAdded  ",entryAddedForPatient);
+
+    const testEntry = action.payload[1];
+
+    console.log("TESTINGETRY ", testEntry);
+
+
+    const entryAddedForPatient = {...updatedPatientEntryFor, entries: updatedPatientEntryFor?.entries?.concat(testEntry)};
+
+    const updatedPatientsE = patients3.map(patient => patient.id !== action.payload[0] ? patient : entryAddedForPatient);
+
+    console.log("updatedPatientsE ",updatedPatientsE);
 
        // const patientEntryFor = ptnts.find(ptn => ptn.id === action.payload[0]);
-
-        return {
-          ...state,
-          ...state.patients
-
-          /*
-          entries: {
-            ...state.patients.entries,
-            [action.payload.]
-          }*/
-
-/*
-          ...patientEntryFor, entries: patientEntryFor?.entries.concat(action.payload[1])
-
-
-          patients: {
-            ...state.patients,
-            [action.payload.id]: action.payload
-
-          }*/
-        };
+       return {
+        ...state,
+        ...state.patients,
+        
+        patients: {
+         ...updatedPatientsE.reduce(
+           (memo, patient) => ({ ...memo, [patient.id]: patient }),
+           
+           {}
+         ),
+        // ...state.patients
+ 
+         //[action.payload.id]: action.payload
+ 
+        }
+       
+             };
 
     case "SET_DIAGNOSE_CODES":
       return {

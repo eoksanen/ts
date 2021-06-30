@@ -21,7 +21,7 @@ export interface Patient {
   entries?: Entry[];
 }
 
- type State = {
+export type State = {
   patients: { [id: string]: Patient  | undefined };
   diagnoses: {[code: string]: Diagnosis  | undefined};
 
