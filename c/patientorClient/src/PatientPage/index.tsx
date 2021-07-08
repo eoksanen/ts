@@ -27,19 +27,19 @@ const closeModal = (): void => {
 
 
     
-console.log("Patients STATE diagnosis ", diagnoses);
-console.log("Patients STATE", patients);
+//console.log("Patients STATE diagnosis ", diagnoses);
+//console.log("Patients STATE", patients);
 
     const patient = Object.values(patients).find((patient: Patient) => ((patient.id === id)));
     const diagnosesFromObject = Object.values(diagnoses);
 
-    console.log("diagnosesFromObject ", diagnosesFromObject);
+    //console.log("diagnosesFromObject ", diagnosesFromObject);
     
     //Object.values(diagnoses).find((diagnosis: Diagnosis) => ((diagnosis.code === dc)));
   
   
     React.useEffect(() => {
-      console.log("PatientPage");
+    //  console.log("PatientPage");
       axios.get<void>(`${apiBaseUrl}/ping`);
   
       const fetchPatientList = async () => {
@@ -48,7 +48,7 @@ console.log("Patients STATE", patients);
           const { data: patientFromApiByID } = await axios.get<Patient>(
             `${apiBaseUrl}/patients/${id}`
           );
-          console.log("fetched pattients full info", patientFromApiByID);
+        //  console.log("fetched pattients full info", patientFromApiByID);
          dispatch({ type: "SET_PATIENT", payload: patientFromApiByID });
         // dispatch(setPatient(patientFromApiByID));
         } catch (e) {

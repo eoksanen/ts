@@ -42,6 +42,8 @@ export const reducer = (state: State, action: Action): State => {
      const patients2 = Object.values(state.patients);
      const updatedPatients = patients2.map(patient => patient.id !== action.payload.id ? patient : action.payload);
 
+     console.log("updatedPatients", updatedPatients );
+
        return {
        ...state,
        patients: {
@@ -71,12 +73,12 @@ export const reducer = (state: State, action: Action): State => {
     //    const ptnts = Object.values(state.patients);
 
     const patients3 = Object.values(state.patients);
-    console.log(patients3);
-    console.log("action payload 1", action.payload[1]);
-    console.log("action payload 0", action.payload[0]);
+    //console.log(patients3);
+    //console.log("action payload 1", action.payload[1]);
+    //console.log("action payload 0", action.payload[0]);
     const updatedPatientEntryFor = patients3.find(patient => patient.id === action.payload[0]);
 
-    console.log("updatedPatientEntryFor  ",updatedPatientEntryFor);
+    //console.log("updatedPatientEntryFor  ",updatedPatientEntryFor);
 
 
     //const entryAddedForPatient =  updatedPatientEntryFor?.entries?.concat(action.payload[1]);
@@ -85,20 +87,18 @@ export const reducer = (state: State, action: Action): State => {
 
     const testEntry = action.payload[1];
 
-    console.log("TESTINGETRY ", testEntry);
+    //console.log("TESTINGETRY ", testEntry);
 
 
     const entryAddedForPatient = {...updatedPatientEntryFor, entries: updatedPatientEntryFor?.entries?.concat(testEntry)};
 
-    const updatedPatientsE = patients3.map(patient => patient.id !== action.payload[0] ? patient : entryAddedForPatient);
+    const updatedPatientsE: Patient[] = patients3.map(patient => patient.id !== action.payload[0] ? patient : entryAddedForPatient as Patient);
 
     console.log("updatedPatientsE ",updatedPatientsE);
 
        // const patientEntryFor = ptnts.find(ptn => ptn.id === action.payload[0]);
        return {
         ...state,
-        ...state.patients,
-        
         patients: {
          ...updatedPatientsE.reduce(
            (memo, patient) => ({ ...memo, [patient.id]: patient }),
