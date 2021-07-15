@@ -4,6 +4,12 @@ export interface Diagnosis {
   latin?: string; 
 }
 
+export enum Type {
+  HealthCheck = "HealthCheck",
+  Hospital = "Hospital",
+  OccupationalHealthcare = "OccupationalHealthcare"
+
+}
 
 export enum Gender {
   Male = "male",

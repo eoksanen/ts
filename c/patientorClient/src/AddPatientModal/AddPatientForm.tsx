@@ -48,6 +48,7 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
         if (!values.occupation) {
           errors.occupation = requiredError;
         }
+        console.log("errors ", errors);
         return errors;
       }}
     >

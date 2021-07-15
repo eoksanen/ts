@@ -45,6 +45,8 @@ router.post('/:id/entries', (_req, res) => {
 
   const newEntryForPatient = toNewEntryForPatient(_req.body);
 
+  console.log(typeof(newEntryForPatient.date));
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const addedEntryForPatient = patientService.addEntryForPatient(patientId, newEntryForPatient);
   res.json(addedEntryForPatient);
